@@ -297,6 +297,18 @@ export const FormUpdat = styled.form`
       border: 2px solid #e60000;
     }
   }
+  button{
+    width: 90%;
+    height: 50px;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    color: #00aeff;
+    border: none;
+    background-color: transparent;
+    border: 2px solid #00aeff;
+    border-radius: 8px;
+    cursor: pointer;
+  }
   .buttonLogin {
     width: 90%;
     height: 50px;
@@ -309,6 +321,7 @@ export const FormUpdat = styled.form`
     cursor: pointer;
     margin-bottom: 50px;
   }
+
   @media (min-width: 850px) {
     width: 800px;
   }

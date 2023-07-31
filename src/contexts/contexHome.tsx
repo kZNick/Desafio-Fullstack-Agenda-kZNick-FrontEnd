@@ -13,6 +13,7 @@ export const HomeProvider = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [openModlaEdit, setOpenModlaEdit] = useState<boolean>(false);
   const [openModlaCreate, setOpenModlaCreate] = useState<boolean>(false);
+  const [modalDeleteContact, setModalDeleteContact] = useState<boolean>(false);
   const [openModlaEditContact, setOpenModlaEditContact] =
     useState<boolean>(false);
   const [user, setUser] = useState({});
@@ -252,6 +253,32 @@ export const HomeProvider = () => {
     }
   };
 
+  const deleteContacts = async () => {
+    try {
+      setLoading(true);
+      const requestResult = await apiContacts.delete(`/contact/${contactSave.id}`,headerApi);
+      contactsApi();
+      toast.success("Contato foi deletado Com sucesso", {
+        position: "top-right",
+      });
+    } catch (error: any) {
+      console.log(error);
+        toast.error("😅Ops! Algo deu errado", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+    } finally {
+      setModalDeleteContact(!modalDeleteContact)
+      setLoading(false);
+    }
+  };
+
   return (
     <HomeContext.Provider
       value={{
@@ -269,6 +296,9 @@ export const HomeProvider = () => {
         creatContacts,
         openModlaCreate,
         setOpenModlaCreate,
+        modalDeleteContact,
+        setModalDeleteContact,
+        deleteContacts
       }}
     >
       <Outlet />

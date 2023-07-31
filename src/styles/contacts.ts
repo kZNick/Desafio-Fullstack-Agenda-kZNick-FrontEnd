@@ -61,6 +61,18 @@ export const ContactsStyled = styled.div`
       }
     }
   }
+  .notContacts{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    color: #084972;
+    img{
+      width: 30%;
+      z-index: -2;
+    }
+  }
   @media (max-width: 850px){
     width: 90%;
   }

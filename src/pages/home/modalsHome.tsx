@@ -180,6 +180,8 @@ export const EditContcts = () => {
     setOpenModlaEditContact,
     editContacts,
     contactSave,
+    modalDeleteContact,
+    setModalDeleteContact,
   }: any = useContext(HomeContext);
 
   const handlePhoneInput = (event: any) => {
@@ -259,10 +261,36 @@ export const EditContcts = () => {
           <label htmlFor="telefone">Telefone</label>
           <span className="error">{errors.telefone?.message}</span>
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            setOpenModlaEditContact(!openModlaEditContact);
+            setModalDeleteContact(!modalDeleteContact);
+          }}
+        >
+          Deletar Contato
+        </button>
         <button className="buttonLogin" type="submit">
           Salvar alterações
         </button>
       </FormUpdat>
+    </ModalEditProfile>
+  );
+};
+
+export const DeleteContacts = () => {
+  const { modalDeleteContact, setModalDeleteContact, deleteContacts }: any = useContext(HomeContext);
+  return (
+    <ModalEditProfile>
+      <div className="deleteContact">
+        <h2>Tem certeza de que deseja excluir</h2>
+        <div>
+          <button className="buttonYes" onClick={()=> deleteContacts()}>Sim</button>
+          <button onClick={() => setModalDeleteContact(!modalDeleteContact)}>
+            Não
+          </button>
+        </div>
+      </div>
     </ModalEditProfile>
   );
 };
