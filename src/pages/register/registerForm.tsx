@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { RegisterLoginContext } from "../../contexts/contexRegisterLogin";
+import pulse from "../../assets/Pulse.gif"
 
 export const RegisterForm = () => {
 
@@ -91,9 +92,9 @@ export const RegisterForm = () => {
         <span className="error">{errors.confirmPassword?.message}</span>
       </div>
 
-      <button type="submit" className="buttonRegister">
-        Criar Conta
-      </button>
+      <button type="submit" className="buttonRegister" disabled={loading? true: false}>
+        {loading? <img src={pulse}/>: "Criar Conta"}
+      </button>it status
     </FormRegister>
   );
 };

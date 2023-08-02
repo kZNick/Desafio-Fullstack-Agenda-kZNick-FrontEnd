@@ -88,6 +88,10 @@ export const FormLogin = styled.form`
     background-color: #069bdd;
     border: none;
     color: white;
+    img{
+      width: 50px;
+      max-width: 100%;
+    }
   }
   .buttonLogin:hover {
     background-color: #064967;
@@ -199,6 +203,9 @@ export const FormRegister = styled.form`
     }
   }
   .buttonRegister {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 15px;
     height: 35px;
     font-weight: 700;
@@ -209,6 +216,10 @@ export const FormRegister = styled.form`
     color: white;
     cursor: pointer;
     transition: 0.8s;
+    img{
+      width: 50px;
+      max-width: 100%;
+    }
   }
   @media (max-width: 850px) {
     .HeaderForm {
@@ -320,6 +331,9 @@ export const FormUpdat = styled.form`
     border-radius: 8px;
     cursor: pointer;
     margin-bottom: 50px;
+    img{
+      max-width: 100%;
+    }
   }
 
   @media (min-width: 850px) {

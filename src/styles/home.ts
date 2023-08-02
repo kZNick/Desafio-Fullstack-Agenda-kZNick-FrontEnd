@@ -9,7 +9,7 @@ export const HopmePage = styled.main`
   max-height: 100%;
   background-color: transparent;
   flex-direction: column;
-  gap: 25px;
+  gap: 5px;
   header {
     width: 100%;
     height: 250px;
@@ -47,6 +47,9 @@ export const HopmePage = styled.main`
   }
   .editProfile:hover {
     color: #9ed6ef;
+  }
+  .avatarDiv{
+    transform: translateY(-50px);
   }
   @media (max-width: 850px) {
     header {

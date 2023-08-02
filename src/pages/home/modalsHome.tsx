@@ -6,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { UpdateFormData } from "../../@types/types";
 import { useContext } from "react";
 import { HomeContext } from "../../contexts/contexHome";
+import { AvatarStyled } from "../../styles/avatar";
+import Avatar, { genConfig } from "react-nice-avatar";
+import { AvatarComponet } from "../../components/avatar";
 
 export const EditProfile = () => {
   const { user, openModlaEdit, setOpenModlaEdit, editUser }: any =
@@ -56,6 +59,7 @@ export const EditProfile = () => {
         <div className="HeaderForm">
           <h2>Editar Perfil</h2>
         </div>
+        <AvatarComponet/>
         <div className="Inpults">
           <input
             type="text"
@@ -279,18 +283,120 @@ export const EditContcts = () => {
 };
 
 export const DeleteContacts = () => {
-  const { modalDeleteContact, setModalDeleteContact, deleteContacts }: any = useContext(HomeContext);
+  const { modalDeleteContact, setModalDeleteContact, deleteContacts }: any =
+    useContext(HomeContext);
   return (
     <ModalEditProfile>
       <div className="deleteContact">
         <h2>Tem certeza de que deseja excluir</h2>
         <div>
-          <button className="buttonYes" onClick={()=> deleteContacts()}>Sim</button>
+          <button className="buttonYes" onClick={() => deleteContacts()}>
+            Sim
+          </button>
           <button onClick={() => setModalDeleteContact(!modalDeleteContact)}>
             Não
           </button>
         </div>
       </div>
     </ModalEditProfile>
+  );
+};
+
+export const AvatarModal = () => {
+  const { configAvatar, setConfigAvatar,saveAvatar }: any = useContext(HomeContext);
+
+  const handleAttributeChange = (attribute: string, options: string[]) => {
+    const currentValue = configAvatar[attribute];
+    const currentIndex = options.indexOf(currentValue);
+    const nextIndex = (currentIndex + 1) % options.length;
+    const nextValue = options[nextIndex];
+    setConfigAvatar((prevConfig: any) => ({
+      ...prevConfig,
+      [attribute]: nextValue,
+    }));
+  };
+  const myConfig = genConfig(configAvatar);
+  return (
+    <AvatarStyled>
+      <div className="conteiner">
+        <div className="avatarTex">
+          <h2>
+            "Olá! Seja bem-vindo(a)! Antes de começarmos a criar seus contatos,
+            vamos deixar seu avatar com a sua cara. Personalize-o do jeito que
+            mais te representa!"
+          </h2>
+        </div>
+        <Avatar
+          style={{ width: "150px", height: "150px" }}
+          {...myConfig}
+          className="avatarConfig"
+        />
+        <div className="buttons">
+          <button
+            onClick={() =>
+              handleAttributeChange("faceColor", ["#AC6651", "#F9C9B6"])
+            }
+          >
+            Cor
+          </button>
+          <button
+            onClick={() =>
+              handleAttributeChange("hairStyle", [
+                "normal",
+                "thick",
+                "mohawk",
+                "womanLong",
+                "womanShort",
+              ])
+            }
+          >
+            Penteado
+          </button>
+          <button
+            onClick={() =>
+              handleAttributeChange("hatStyle", ["none", "beanie", "turban"])
+            }
+          >
+            Chapéu
+          </button>
+          <button
+            onClick={() =>
+              handleAttributeChange("eyeStyle", ["circle", "oval", "smile"])
+            }
+          >
+            Olho
+          </button>
+          <button
+            onClick={() =>
+              handleAttributeChange("glassesStyle", ["none", "round", "square"])
+            }
+          >
+            Óculos
+          </button>
+          <button
+            onClick={() =>
+              handleAttributeChange("noseStyle", ["short", "long", "round"])
+            }
+          >
+            Nariz
+          </button>
+          <button
+            onClick={() =>
+              handleAttributeChange("mouthStyle", ["laugh", "smile", "peace"])
+            }
+          >
+            Boca
+          </button>
+          <button
+            onClick={() =>
+              handleAttributeChange("shirtStyle", ["hoody", "short", "polo"])
+            }
+          >
+            Camisa
+          </button>
+        </div>
+        <button className="SaveAvatar" onClick={()=> saveAvatar()}>Salvar Avatar</button>
+      </div>
+    </AvatarStyled>
   );
 };

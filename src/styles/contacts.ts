@@ -58,6 +58,11 @@ export const ContactsStyled = styled.div`
       }
       div {
         width: 100%;
+        .headerContact{
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
       }
     }
   }

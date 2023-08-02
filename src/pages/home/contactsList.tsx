@@ -48,7 +48,7 @@ export const Contacts = () => {
             return (
               <li key={contact.id} onClick={() => toggleDetails(contact.id)}>
                 <div>
-                  <div>
+                  <div className="headerContact">
                     <h3>{contact.fullName}</h3>
                   </div>
                   {showDetails && (
@@ -78,7 +78,7 @@ export const Contacts = () => {
         </ul>
       ) : (
         <div className="notContacts">
-          <h2>Você não tem nem um contato ainda adicionar o icone de +</h2>
+          <h2>Você não tem nem um contato ainda adicionar no icone de +</h2>
           <img src={emoji} alt="" />
         </div>
       )}

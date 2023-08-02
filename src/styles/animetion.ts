@@ -102,3 +102,25 @@ export const AnimentionStyled = styled.div`
     animation-duration: 11s;
   }
 `;
+
+export const LoadingAnimetions = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  max-height: 100%;
+  background-color: rgba(18, 18, 20, 0.5);
+  z-index: 999;
+  gap: 15px;
+  img{
+    max-width: 100%;
+  }
+  h1{
+    color: white;
+  }
+`

@@ -6,6 +6,7 @@ import { RegisterLoginContext } from "../../contexts/contexRegisterLogin";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UserFormData } from "../../@types/types";
 import { useForm } from "react-hook-form";
+import Pulse from "../../assets/Pulse.gif"
 
 export const LoginForm = () => {
   const { handleSubmitLogin, loading } = useContext(RegisterLoginContext);
@@ -39,8 +40,8 @@ export const LoginForm = () => {
       >
         Cadastrar
       </WavyLink>
-      <button className="buttonLogin" type="submit">
-        Entar
+      <button className="buttonLogin" type="submit" disabled={loading? true: false}>
+        {loading? <img src={Pulse}/> : "Entar"}
       </button>
     </FormLogin>
   );
