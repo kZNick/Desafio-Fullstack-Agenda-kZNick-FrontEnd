@@ -3,7 +3,6 @@ import { HomeContextData } from "../@types/types";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { apiContacts } from "../services/api";
-import jwt_decode from "jwt-decode";
 
 export const HomeContext = createContext<HomeContextData>(
   {} as HomeContextData
@@ -14,7 +13,7 @@ export const HomeProvider = () => {
   const [openModlaEdit, setOpenModlaEdit] = useState<boolean>(false);
   const [openModlaCreate, setOpenModlaCreate] = useState<boolean>(false);
   const [modalDeleteContact, setModalDeleteContact] = useState<boolean>(false);
-  const [modalAvatar, setModalAvatar] = useState<boolean>(true);
+  const [modalAvatar, setModalAvatar] = useState<boolean>(false);
   const [openModlaEditContact, setOpenModlaEditContact] =
     useState<boolean>(false);
   const [user, setUser] = useState({});
@@ -37,11 +36,26 @@ export const HomeProvider = () => {
     shirtColor: "#0d1a1c",
     bgColor: "linear-gradient(45deg, #176fff 0%, #68ffef 100%)",
   });
-  const [userAvatar, setUserAvatar] = useState<any>({})
+  const [userAvatar, setUserAvatar] = useState<any>({
+    sex: "man",
+    faceColor: "#AC6651",
+    earSize: "big",
+    eyeStyle: "smile",
+    noseStyle: "long",
+    mouthStyle: "smile",
+    shirtStyle: "hoody",
+    glassesStyle: "round",
+    hairColor: "#000000",
+    hairStyle: "thick",
+    hatStyle: "none",
+    hatColor: "#1b1f4b",
+    eyeBrowStyle: "up",
+    shirtColor: "#0d1a1c",
+    bgColor: "linear-gradient(45deg, #176fff 0%, #68ffef 100%)",
+  })
 
   const navigate = useNavigate();
   const token: string | null = localStorage.getItem("ContactsTokenUser");
-  let decode: any = "";
 
   const headerApi = {
     headers: {
@@ -66,15 +80,12 @@ export const HomeProvider = () => {
       localStorage.clear();
       navigate("/login");
     }
-    if (token) {
-      decode = jwt_decode(token);
-    }
     const userApi = async () => {
       try {
         setLoading(true);
         const api = await apiContacts.get("/users", headerApi);
         setUser(api.data);
-    
+        setModalAvatar(true)
         if (api.data.avatar !== null) {
           setModalAvatar(false);
           const avatar = JSON.parse(api.data.avatar);
@@ -93,6 +104,7 @@ export const HomeProvider = () => {
           progress: undefined,
           theme: "light",
         });
+        console.log("deu erro")
         navigate("/login");
       } finally {
         setLoading(false);

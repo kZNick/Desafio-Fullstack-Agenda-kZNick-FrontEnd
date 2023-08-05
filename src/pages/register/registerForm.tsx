@@ -94,7 +94,7 @@ export const RegisterForm = () => {
 
       <button type="submit" className="buttonRegister" disabled={loading? true: false}>
         {loading? <img src={pulse}/>: "Criar Conta"}
-      </button>it status
+      </button>
     </FormRegister>
   );
 };

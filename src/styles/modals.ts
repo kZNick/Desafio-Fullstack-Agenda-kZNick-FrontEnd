@@ -11,7 +11,7 @@ export const ModalEditProfile = styled.div`
   height: 100vh;
   max-height: 100%;
   background-color: rgba(18, 18, 20, 0.5);
-  z-index: 999;
+  z-index: 99;
   .deleteContact {
     display: flex;
     flex-direction: column;

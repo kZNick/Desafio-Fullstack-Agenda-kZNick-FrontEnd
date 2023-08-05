@@ -1,6 +1,6 @@
 import axios from "axios"; 
 
 export const apiContacts = axios.create({
-    baseURL: "http://localhost:3001",
-    timeout: 8000
+    baseURL: "https://contactsapi-ufzf.onrender.com",
+    timeout: 25000
 })

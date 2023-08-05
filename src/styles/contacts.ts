@@ -21,7 +21,7 @@ export const ContactsStyled = styled.div`
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
     margin-top: 25px;
     width: 100%;
     margin-bottom: 80px;

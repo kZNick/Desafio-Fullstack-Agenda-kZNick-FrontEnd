@@ -10,6 +10,8 @@ export const HopmePage = styled.main`
   background-color: transparent;
   flex-direction: column;
   gap: 5px;
+  -webkit-animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+	        animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
   header {
     width: 100%;
     height: 250px;
