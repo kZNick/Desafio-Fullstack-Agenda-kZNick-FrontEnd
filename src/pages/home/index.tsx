@@ -1,4 +1,4 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { HopmePage } from "../../styles/home";
 import { HomeContext } from "../../contexts/contexHome";
 import { RxExit } from "react-icons/rx";
@@ -9,6 +9,7 @@ import {
   AvatarModal,
   CreateContcts,
   DeleteContacts,
+  DeleteUser,
   EditContcts,
   EditProfile,
 } from "./modalsHome";
@@ -25,17 +26,19 @@ export const Home = () => {
     modalDeleteContact,
     modalAvatar,
     userAvatar,
-    loading
+    loading,
+    modalDeleteUser,
   }: any = useContext(HomeContext);
   const myConfig = genConfig(userAvatar);
   return (
     <>
-      {loading? <Loading/>:null}
+      {loading ? <Loading /> : null}
       {openModlaEdit ? <EditProfile /> : null}
       {openModlaEditContact ? <EditContcts /> : null}
       {openModlaCreate ? <CreateContcts /> : null}
       {modalDeleteContact ? <DeleteContacts /> : null}
       {modalAvatar ? <AvatarModal /> : null}
+      {modalDeleteUser ? <DeleteUser/> : null}
       <HopmePage>
         <AnimetionBackgraud />
         <header>.</header>

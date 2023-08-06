@@ -11,8 +11,14 @@ import Avatar, { genConfig } from "react-nice-avatar";
 import { AvatarComponet } from "../../components/avatar";
 
 export const EditProfile = () => {
-  const { user, openModlaEdit, setOpenModlaEdit, editUser }: any =
-    useContext(HomeContext);
+  const {
+    user,
+    openModlaEdit,
+    setOpenModlaEdit,
+    editUser,
+    setModalDeleteUser,
+    modalDeleteUser,
+  }: any = useContext(HomeContext);
 
   const handlePhoneInput = (event: any) => {
     const phoneValue = event.target.value;
@@ -59,7 +65,7 @@ export const EditProfile = () => {
         <div className="HeaderForm">
           <h2>Editar Perfil</h2>
         </div>
-        <AvatarComponet/>
+        <AvatarComponet />
         <div className="Inpults">
           <input
             type="text"
@@ -92,6 +98,15 @@ export const EditProfile = () => {
           <label htmlFor="telefone">Telefone</label>
           <span className="error">{errors.telefone?.message}</span>
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            setOpenModlaEdit(!openModlaEdit);
+            setModalDeleteUser(!modalDeleteUser);
+          }}
+        >
+          Deletar Conta
+        </button>
         <button className="buttonLogin" type="submit">
           Salvar alterações
         </button>
@@ -302,8 +317,29 @@ export const DeleteContacts = () => {
   );
 };
 
+export const DeleteUser = () => {
+  const { setModalDeleteUser, modalDeleteUser, deleteUsers }: any =
+    useContext(HomeContext);
+  return (
+    <ModalEditProfile>
+      <div className="deleteContact">
+        <h2>Tem certeza de que deseja excluir</h2>
+        <div>
+          <button className="buttonYes" onClick={() => deleteUsers()}>
+            Sim
+          </button>
+          <button onClick={() => setModalDeleteUser(!modalDeleteUser)}>
+            Não
+          </button>
+        </div>
+      </div>
+    </ModalEditProfile>
+  );
+};
+
 export const AvatarModal = () => {
-  const { configAvatar, setConfigAvatar,saveAvatar }: any = useContext(HomeContext);
+  const { configAvatar, setConfigAvatar, saveAvatar }: any =
+    useContext(HomeContext);
 
   const handleAttributeChange = (attribute: string, options: string[]) => {
     const currentValue = configAvatar[attribute];
@@ -326,11 +362,13 @@ export const AvatarModal = () => {
             mais te representa!"
           </h2>
         </div>
-        <Avatar
-          style={{ width: "150px", height: "150px" }}
-          {...myConfig}
-          className="avatarConfig"
-        />
+        <div>
+          <Avatar
+            style={{ width: "150px", height: "150px" }}
+            {...myConfig}
+            className="avatarConfig"
+          />
+        </div>
         <div className="buttons">
           <button
             onClick={() =>
@@ -395,7 +433,9 @@ export const AvatarModal = () => {
             Camisa
           </button>
         </div>
-        <button className="SaveAvatar" onClick={()=> saveAvatar()}>Salvar Avatar</button>
+        <button className="SaveAvatar" onClick={() => saveAvatar()}>
+          Salvar Avatar
+        </button>
       </div>
     </AvatarStyled>
   );

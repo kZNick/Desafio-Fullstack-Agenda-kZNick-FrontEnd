@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import backgraoundImg from "../assets/teste.svg";
 
 export const HopmePage = styled.main`
+  font-family: "Ysabeau Office", sans-serif;
   display: flex;
   align-items: center;
   width: 100%;
@@ -10,8 +11,9 @@ export const HopmePage = styled.main`
   background-color: transparent;
   flex-direction: column;
   gap: 5px;
-  -webkit-animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
-	        animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+  -webkit-animation: slide-in-blurred-top 0.6s cubic-bezier(0.23, 1, 0.32, 1)
+    both;
+  animation: slide-in-blurred-top 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
   header {
     width: 100%;
     height: 250px;
@@ -23,6 +25,7 @@ export const HopmePage = styled.main`
   }
   h1 {
     color: #064967;
+    font-size: 2rem;
   }
   .buttonExit {
     position: absolute;
@@ -50,13 +53,19 @@ export const HopmePage = styled.main`
   .editProfile:hover {
     color: #9ed6ef;
   }
-  .avatarDiv{
+  .avatarDiv {
     transform: translateY(-50px);
   }
   @media (max-width: 850px) {
     header {
       height: 100px;
       min-height: 100px;
+    }
+    h1 {
+      font-size: 1.3rem;
+    }
+    h2 {
+      font-size: 1.2rem;
     }
   }
 `;

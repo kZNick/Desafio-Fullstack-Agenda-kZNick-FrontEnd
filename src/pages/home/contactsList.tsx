@@ -65,7 +65,6 @@ export const Contacts = () => {
                           event.stopPropagation();
                           SetContactSave(contactEditSave);
                           setOpenModlaEditContact(!openModlaEditContact);
-                          console.log(contactSave);
                         }}
                       />
                     </div>

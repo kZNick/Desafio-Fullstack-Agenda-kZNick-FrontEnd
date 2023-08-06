@@ -114,7 +114,7 @@ export const LoadingAnimetions = styled.div`
   width: 100%;
   height: 100vh;
   max-height: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   z-index: 9999;
   gap: 15px;
   img{

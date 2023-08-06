@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { apiContacts } from "../services/api";
 import { toast } from "react-toastify";
@@ -9,11 +9,17 @@ export const RegisterLoginContext = createContext<RegisterLoginContextData>({} a
 
 export const RegisterLoginProvider = () => {
   const navigate = useNavigate();
+  const token: string | null = localStorage.getItem("ContactsTokenUser");
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(()=>{
+    if(token){
+      navigate("/");
+    }
+  },[])
 
   const handleSubmitLogin: SubmitHandler<UserFormData> = async (data) => {
     setLoading(true);
-    console.log(data);
     try {
       const response = await apiContacts.post("/login", data);
       toast.success("Login feito com Sucesso", {
@@ -26,7 +32,6 @@ export const RegisterLoginProvider = () => {
         progress: undefined,
         theme: "dark",
       });
-      console.log(response);
       localStorage.setItem("ContactsTokenUser", response.data.token);
       navigate("/");
     } catch (error) {
@@ -62,7 +67,6 @@ export const RegisterLoginProvider = () => {
         progress: undefined,
         theme: "dark",
       });
-      console.log(response);
       const login = {
         email: datas.email,
         password: datas.password,

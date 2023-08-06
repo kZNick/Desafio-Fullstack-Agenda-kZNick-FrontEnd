@@ -13,6 +13,7 @@ export const HomeProvider = () => {
   const [openModlaEdit, setOpenModlaEdit] = useState<boolean>(false);
   const [openModlaCreate, setOpenModlaCreate] = useState<boolean>(false);
   const [modalDeleteContact, setModalDeleteContact] = useState<boolean>(false);
+  const [modalDeleteUser, setModalDeleteUser] = useState<boolean>(false);
   const [modalAvatar, setModalAvatar] = useState<boolean>(false);
   const [openModlaEditContact, setOpenModlaEditContact] =
     useState<boolean>(false);
@@ -52,7 +53,7 @@ export const HomeProvider = () => {
     eyeBrowStyle: "up",
     shirtColor: "#0d1a1c",
     bgColor: "linear-gradient(45deg, #176fff 0%, #68ffef 100%)",
-  })
+  });
 
   const navigate = useNavigate();
   const token: string | null = localStorage.getItem("ContactsTokenUser");
@@ -85,12 +86,12 @@ export const HomeProvider = () => {
         setLoading(true);
         const api = await apiContacts.get("/users", headerApi);
         setUser(api.data);
-        setModalAvatar(true)
+        setModalAvatar(true);
         if (api.data.avatar !== null) {
           setModalAvatar(false);
           const avatar = JSON.parse(api.data.avatar);
           setUserAvatar(avatar);
-          setConfigAvatar(avatar)
+          setConfigAvatar(avatar);
         }
       } catch (error) {
         console.log(error);
@@ -104,8 +105,9 @@ export const HomeProvider = () => {
           progress: undefined,
           theme: "light",
         });
-        console.log("deu erro")
+        localStorage.removeItem("ContactsTokenUser");
         navigate("/login");
+        localStorage.clear();
       } finally {
         setLoading(false);
       }
@@ -179,8 +181,8 @@ export const HomeProvider = () => {
   };
 
   const editUser = async (datas: any) => {
-    const avatarJson = JSON.stringify(configAvatar)
-    datas.avatar = avatarJson
+    const avatarJson = JSON.stringify(configAvatar);
+    datas.avatar = avatarJson;
     try {
       setLoading(true);
       const requestResult = await apiContacts.patch(`/users`, datas, headerApi);
@@ -239,15 +241,18 @@ export const HomeProvider = () => {
     }
   };
 
-
   const saveAvatar = async () => {
-    const avatarJson = JSON.stringify(configAvatar)
-    const avatrData =  {
-      avatar : avatarJson
-    }
+    const avatarJson = JSON.stringify(configAvatar);
+    const avatrData = {
+      avatar: avatarJson,
+    };
     try {
       setLoading(true);
-      const requestResult = await apiContacts.patch(`/users`, avatrData, headerApi);
+      const requestResult = await apiContacts.patch(
+        `/users`,
+        avatrData,
+        headerApi
+      );
       setUser(requestResult.data);
       const avatar = JSON.parse(requestResult.data.avatar);
       setUserAvatar(avatar);
@@ -255,24 +260,22 @@ export const HomeProvider = () => {
         position: "top-right",
       });
     } catch (error) {
-      console.log(error)
-        toast.error("😅Ops! Algo deu errado", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-    }finally{
-      setModalAvatar(false)
+      console.log(error);
+      toast.error("😅Ops! Algo deu errado", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } finally {
+      setModalAvatar(false);
       setLoading(false);
     }
-  
-  }
-
+  };
 
   const editContacts = async (datas: any) => {
     try {
@@ -364,6 +367,34 @@ export const HomeProvider = () => {
     }
   };
 
+  const deleteUsers = async () => {
+    try {
+      setLoading(true);
+      const requestResult = await apiContacts.delete(`/users`, headerApi);
+      toast.success("Conta deletado Com sucesso", {
+        position: "top-right",
+      });
+      localStorage.removeItem("ContactsTokenUser");
+      navigate("/login");
+      localStorage.clear();
+    } catch (error: any) {
+      console.log(error);
+      toast.error("😅Ops! Algo deu errado", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } finally {
+      setModalDeleteUser(!modalDeleteUser);
+      setLoading(false);
+    }
+  };
+
   return (
     <HomeContext.Provider
       value={{
@@ -388,8 +419,12 @@ export const HomeProvider = () => {
         setConfigAvatar,
         modalAvatar,
         setModalAvatar,
-        saveAvatar,userAvatar,
-        loading
+        saveAvatar,
+        userAvatar,
+        loading,
+        deleteUsers,
+        modalDeleteUser,
+        setModalDeleteUser,
       }}
     >
       <Outlet />
